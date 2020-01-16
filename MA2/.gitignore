@@ -1,0 +1,6 @@
+*.ignore
+*.test
+*.swp
+*.out
+*.class
+*.o

@@ -94,6 +94,28 @@ public class Time {
 	public void formatString(String format_str)
 	{
 		
+		int c = 0;
+		try 
+		{
+			for (String ret: format_str.split(":"))
+			{
+				if (c > 3)
+				{
+
+					
+				}
+				Integer.parseInt(ret);
+				c++;
+			}
+
+		} catch (ExceptionName NumberFormatException)
+		{
+			
+			hours    = 0;
+			minutes  = 0; 
+			secounds = 0;
+
+		}
 
 
 	}
