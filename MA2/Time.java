@@ -93,29 +93,62 @@ public class Time {
 
 	public void formatString(String format_str)
 	{
-		
+		String errorMsg = null;
 		int c = 0;
 		try 
 		{
 			for (String ret: format_str.split(":"))
 			{
-				if (c > 3)
+				if (c == 0)
 				{
+					hours = Integer.parseInt(ret);
+					if (hours >= 24)
+					{
+						throw new IllegalArgumentException("Hours cant be above 23");	
+					}
 
-					
+				}else if (c == 1)
+				{
+					minutes = Integer.parseInt(ret);
+					if (minutes >= 60)
+					{
+						throw new IllegalArgumentException("Minutes cant be above 59");	
+					}
+
+				}else if (c == 2)
+				{
+					secounds = Integer.parseInt(ret);	
+					if (hours >= 60)
+					{
+						throw new IllegalArgumentException("Secounds cant be above 59");	
+					}
+
+				}else if (c >= 3)
+				{		
+					throw new IllegalArgumentException("Too many Arguments found while splitting the formated string");
 				}
-				Integer.parseInt(ret);
+
 				c++;
 			}
 
-		} catch (ExceptionName NumberFormatException)
+		} catch (NumberFormatException e1)
 		{
+			errorMsg = e1.getMessage();
+
+		} catch (IllegalArgumentException e2)
+		{
+			errorMsg = e2.getMessage();
+
+		} finally
+		{
+			System.out.println("[Time.class] " + errorMsg + "\n[||->] Setting the time to 00:00:00");
 			
 			hours    = 0;
 			minutes  = 0; 
 			secounds = 0;
 
 		}
+
 
 
 	}
