@@ -1,13 +1,13 @@
-
 public class Time {
 
 	private int hours;
 	private int minutes; 
 	private int secounds;
 
-
-	// Constructor
+	//suggestion: perhaps add a private method that class uses to check it validity of it's data members
+	// instead of copy pasting the code
 	
+	// Constructor
 	public Time(int hours, int minutes, int secounds)
 	{
 	
@@ -24,9 +24,14 @@ public class Time {
 		this.secounds = secounds;
 	}
 	
+	// string Constructor
+	
+	public Time(String time){
+		formatString(time);}
+	
 	// Copy Constructor
 	
-	Time(Time mytime)
+	Time(Time mytime) // public by default?
 	{
 		hours    = mytime.hours;
 		minutes  = mytime.minutes;
@@ -71,21 +76,8 @@ public class Time {
 	// equals methode
 	// C Constructor
 	
-	public void equals(int hours, int minutes, int secounds)
-	{
-	
-		// Check if given time is valid
-		if (hours >= 24 || minutes >= 60 || secounds >= 60)
-		{
-			this.hours    = 0;
-			this.minutes  =	0; 
-			this.secounds = 0;
-		}
-
-		this.hours    = hours;
-		this.minutes  = minutes;
-		this.secounds = secounds;
-	}
+	public boolean equals(int hours, int minutes, int secounds){
+		return (hours == this.hours) && (minutes == this.minutes) && (secounds == this.secounds);}
 
 	// formatString methode
 	// This takes a string in the format -> HH:MM:SS
@@ -106,50 +98,35 @@ public class Time {
 					{
 						throw new IllegalArgumentException("Hours cant be above 23");	
 					}
-
-				}else if (c == 1)
+				}
+				
+				else if (c == 1)
 				{
 					minutes = Integer.parseInt(ret);
 					if (minutes >= 60)
 					{
 						throw new IllegalArgumentException("Minutes cant be above 59");	
 					}
-
-				}else if (c == 2)
+				}
+				else if (c == 2)
 				{
-					secounds = Integer.parseInt(ret);	
-					if (hours >= 60)
+					secounds = Integer.parseInt(ret);
+					if (secounds >= 60)
 					{
 						throw new IllegalArgumentException("Secounds cant be above 59");	
 					}
-
-				}else if (c >= 3)
-				{		
-					throw new IllegalArgumentException("Too many Arguments found while splitting the formated string");
 				}
-
 				c++;
 			}
 
-		} catch (NumberFormatException e1)
+		} 
+		catch (IllegalArgumentException e)
 		{
-			errorMsg = e1.getMessage();
-
-		} catch (IllegalArgumentException e2)
-		{
-			errorMsg = e2.getMessage();
-
-		} finally
-		{
-			System.out.println("[Time.class] " + errorMsg + "\n[||->] Setting the time to 00:00:00");
-			
-			hours    = 0;
-			minutes  = 0; 
+			hours = 0;
+			minutes = 0;
 			secounds = 0;
-
-		}
-
-
-
+			errorMsg = e.getMessage();
+		} 
 	}
+	
 }
