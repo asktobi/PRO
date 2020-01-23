@@ -4,6 +4,8 @@ public class Time {
 	private int minutes; 
 	private int secounds;
 
+	//suggestion: perhaps add a private method that class uses to check it validity of it's data members
+	// instead of copy pasting the code
 	
 	// Constructor
 	public Time(int hours, int minutes, int secounds)
